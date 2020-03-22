@@ -1,11 +1,12 @@
 from flask import Flask
 from flask import jsonify
-import Indiacorona.py 
+import Indiacorona
 app = Flask(__name__)
-@app.route('/, methods=['GET'])
+@app.route('/total', methods=['GET'])
 def tot():
     return jsonify(Indiacorona.f)
-@app.route('/stats', methods=['GET'])
+
+@app.route('/')
 def index():
     return jsonify(Indiacorona.d)
 if __name__=="__main__":
