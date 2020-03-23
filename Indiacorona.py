@@ -17,6 +17,8 @@ for row in rows:
     break
 c=0
 
+
+
 chunkd = [s[i:i+2] for i in range(0, len(s), 2)]
 
 links=[]
@@ -64,21 +66,27 @@ f={
     "StateWise":[]
 }
 
-air,act,cur,ded,mig=t
+fk={
+    "Updates":[]
+}
+
 for i in range(len(chunkd)):
-  d["Stats"].append(
+   fk[Updates"].append(
+      {
+  "date":chunkd[i][0],
+     "News":chunkd[i][1],
+     "Links":links[i],
+          )}
+
+air,act,cur,ded,mig=t
+d["Stats"].append(
     {
         "Screend":air,
      "ActiveIndia":act,
      "Cured":cur,
      "Death":ded,
-     "date":chunkd[i][0],
-     "News":chunkd[i][1],
-     "Links":links[i],
-
      "migration":mig
-    }
-)
+})
 
 
 
