@@ -11,13 +11,12 @@ soup=bs(page.content,'html.parser')
 tables=soup.find('tbody')
 rows = tables.find_all('tr')
 r=[]
+must=[]
 for row in rows:
     s=row.find_all('td')
-    s=[x.text.strip() for x in s]
-    break
+    must.append([x.text.strip() for x in s])
 c=0
 
-chunkd = [s[i:i+2] for i in range(0, len(s), 2)]
 
 links=[]
 for row in rows:
@@ -94,11 +93,11 @@ for i in chunks:
       
   )
 
-for i in range(len(chunkd)):
+for i in range(len(must)):
   est["News"].append(
       {
-      "date":chunkd[i][0],
-     "news":chunkd[i][1],
+      "date":must[i][0],
+     "news":musti][1],
      "Links":links[i],
       }
   )
