@@ -7,6 +7,29 @@ URL='https://www.mohfw.gov.in/'
 headers={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36'}
 page=requests.get(URL,headers=headers)
 soup=bs(page.content,'html.parser')
+
+tables=soup.find('tbody')
+rows = tables.find_all('tr')
+r=[]
+for row in rows:
+    s=row.find_all('td')
+    s=[x.text.strip() for x in s]
+    break
+c=0
+
+chunkd = [s[i:i+2] for i in range(0, len(s), 2)]
+
+links=[]
+for row in rows:
+    cold=row.find('a')['href']
+    links.append(cold)
+
+
+
+
+
+
+
 ##############################################################################################
 mains=soup.findAll("div", {"class": "content newtab"} )
 for row in mains:
@@ -42,15 +65,22 @@ f={
 }
 
 air,act,cur,ded,mig=t
-d["Stats"].append(
+for i in range(len(chunkd)):
+  d["Stats"].append(
     {
         "Screend":air,
      "ActiveIndia":act,
      "Cured":cur,
      "Death":ded,
+     "date":chunkd[i][0],
+     "News":chunkd[i][1],
+     "Links":links[i],
+
      "migration":mig
     }
 )
+
+
 
 
 for i in chunks:
@@ -64,5 +94,4 @@ for i in chunks:
   }
       
   )
-
 
