@@ -3,7 +3,7 @@ from flask import jsonify
 import Indiacorona
 app = Flask(__name__)
 @app.route('/updates', methods=['GET'])
-def tot():
+def upd():
     return jsonify(Indiacorona.est)
 
 
