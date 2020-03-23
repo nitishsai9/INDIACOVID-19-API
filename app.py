@@ -2,6 +2,11 @@ from flask import Flask
 from flask import jsonify
 import Indiacorona
 app = Flask(__name__)
+@app.route('/updates', methods=['GET'])
+def tot():
+    return jsonify(Indiacorona.est)
+
+
 @app.route('/total', methods=['GET'])
 def tot():
     return jsonify(Indiacorona.f)
