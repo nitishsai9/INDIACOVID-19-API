@@ -97,7 +97,7 @@ for i in range(len(must)):
   est["News"].append(
       {
       "date":must[i][0],
-     "news":must][1],
+     "news":must[i][1],
      "Links":links[i],
       }
   )
