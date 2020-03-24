@@ -2,14 +2,24 @@ from bs4 import BeautifulSoup as bs
 from urllib.request import urlopen as ur
 import requests
 import json
+import re
 
 URL='https://www.mohfw.gov.in/'
 headers={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36'}
 page=requests.get(URL,headers=headers)
 soup=bs(page.content,'html.parser')
 
+
 tables=soup.find('tbody')
 rows = tables.find_all('tr')
+
+pdfsd = soup.find_all('a', href=re.compile(r'(.pdf)'))
+url_list = []
+for el in pdfsd:
+  if(el['href'].startswith('http')) and "District".lower() in el['href'].lower():
+    url_list.append(el['href'])
+statewlist=url_list[-1]
+
 r=[]
 must=[]
 for row in rows:
@@ -22,6 +32,7 @@ links=[]
 for row in rows:
     cold=row.find('a')['href']
     links.append(cold)
+    
 
 
 
@@ -74,7 +85,8 @@ d["Stats"].append(
      "ActiveIndia":act,
      "Cured":cur,
      "Death":ded,
-     "migration":mig
+     "migration":mig,
+        "listurl":statewlist
     }
 )
 
