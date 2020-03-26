@@ -92,10 +92,10 @@ d["Stats"].append(
 
 
 
-
 for i in chunks:
-  sno,st,tconin,tconfo,cd,deds=i
-  f["StateWise"].append({
+    if len(i)==6:
+        sno,st,tconin,tconfo,cd,deds=i
+        f["StateWise"].append({
       "State":st,
       "IndianNational":tconin,
       "ForeignNational":tconfo,
